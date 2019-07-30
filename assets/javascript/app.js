@@ -57,6 +57,22 @@ $(document).ready(function() {
 
 // 2) User clicks START> to get to QUESTION SECTION & displays following
 
+    function startsGame() {
+        $("#endMessage").empty();
+        $("#correctAnswers").empty();
+        $("#incorrectAnswers").empty();
+        $("unanswered").empty();
+        // Reset counters
+        currentQuestion = 0;
+        correctAnswer = 0;
+        incorrectAnswer = 0;
+        unanswered = 0;
+        // Get first question
+        newQuestion()
+    }  
+
+
+
     // a) Time Remaining Counter - counting down
 
     // b) Question user has to answer
