@@ -69,7 +69,7 @@ $(document).ready(function() {
         incorrectAnswer = 0;
         unanswered = 0;
         // Get first question
-        newQuestion()
+        nextQuestion()
         console.log("game started");
     } 
 
@@ -77,20 +77,20 @@ $(document).ready(function() {
     function counter() {
         // second for round
         seconds = 15;
-        $("#timer").html("<h4>Time left:" + seconds + "</h4>");
+        $("#timer").html("<h4>Time left: " + seconds + "</h4>");
         answered = true;
         time = setInterval(showCounter, 1000);
     }
 
     function showCounter() {
         // second countdown
-        seconds --;
-        $("#timer").html("<h4>Time left:" + seconds + "</h4>");
+        seconds--;
+        $("#timer").html("<h4>Time left: " + seconds + "</h4>");
         if (seconds < 1) {
             clearInterval(time);
             answered = false;
             answerSection()
-        }
+        }        
     }
 
     // b) Question user has to answer
@@ -98,15 +98,34 @@ $(document).ready(function() {
         $("#instructions").empty();
         $("#actualAnswer").empty();
         answered = true;
-    }
-    // c) Multiple choice answers to question above
+    
+        // c) Multiple choice answers to question above
+        $("#currentQuestion").html("Question # " + (currentQuestion + 1) + " of " + questions.length);
+        $(".question").html("<h2>" + (questions[currentQuestion].question) + "</h2>");
+        for (var i = 0; i < 4; i++) {
+            var options = $("<div>");
+            options.text(questions[currentQuestion].multChoice[i]);
+            options.attr({"data-index": i}); // "" or ''??????
+            options.addClass("userChoice");
+            $(".multipleChoice").append(options);
+            console.log("step 2 working");
+        }
+        // timer to work
+        counter();
+        console.log("counter works");
 
 // 3) User clicks on an answer > Brings user to ANSWER SECTION & displays following
+        $(".multipleChoice").on("click", function() {
+            userSelected = $(this).data("index");
+            console.log("answer page loading");
+            // a) Same Time Remaining Counter - counting down still
+            clearInterval(time);
+            answerSection()
+        });
 
-    // a) Same Time Remaining Counter - counting down still
-
+    }
     // b) "You're Correct/ Wrong !"
-
+    
     // c) "The correct answer was ______"
 
     // d) **** Potential Gif...****************
