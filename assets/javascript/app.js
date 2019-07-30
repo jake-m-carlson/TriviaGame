@@ -43,7 +43,7 @@ $(document).ready(function() {
     var userSelected = 0;
 
         // Timers
-    var timer = 0;
+    var time = 0;
     var seconds = 0;
 
         // Message screen for RESULTS SECTION
@@ -69,11 +69,27 @@ $(document).ready(function() {
         unanswered = 0;
         // Get first question
         newQuestion()
-    }  
-
-
+    } 
 
     // a) Time Remaining Counter - counting down
+    function counter() {
+        // second for round
+        seconds = 15;
+        $("#timer").html("<h4>Time left:" + seconds + "</h4>");
+        answered = true;
+        time = setInterval(showCounter, 1000);
+    }
+
+    function showCounter() {
+        // second countdown
+        seconds --;
+        $("#timer").html("<h4>Time left:" + seconds + "</h4>");
+        if (seconds < 1) {
+            clearInterval(time);
+            answered - false;
+            answerSection()
+        }
+    }
 
     // b) Question user has to answer
 
