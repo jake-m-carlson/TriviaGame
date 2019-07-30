@@ -57,6 +57,7 @@ $(document).ready(function() {
 
 // 2) User clicks START> to get to QUESTION SECTION & displays following
 
+
     function startsGame() {
         $("#endMessage").empty();
         $("#correctAnswers").empty();
@@ -69,6 +70,7 @@ $(document).ready(function() {
         unanswered = 0;
         // Get first question
         newQuestion()
+        console.log("game started");
     } 
 
     // a) Time Remaining Counter - counting down
@@ -86,13 +88,17 @@ $(document).ready(function() {
         $("#timer").html("<h4>Time left:" + seconds + "</h4>");
         if (seconds < 1) {
             clearInterval(time);
-            answered - false;
+            answered = false;
             answerSection()
         }
     }
 
     // b) Question user has to answer
-
+    function nextQuestion() {
+        $("#instructions").empty();
+        $("#actualAnswer").empty();
+        answered = true;
+    }
     // c) Multiple choice answers to question above
 
 // 3) User clicks on an answer > Brings user to ANSWER SECTION & displays following
@@ -125,7 +131,11 @@ $(document).ready(function() {
 
 // 6) If user clicks Start Over Button, Game starts over//// Page doesn't re-load!!!!!
 
-
+    $("#startBtn").on("click", function() {
+        $(this).hide();
+        console.log("works")
+        startsGame();
+    });
 
 });
 
